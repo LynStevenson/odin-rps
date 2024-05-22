@@ -32,7 +32,17 @@ function playGame(){
     let scissors = document.querySelector("#Scissors");
     let paper = document.querySelector("#Paper");
     let results = document.querySelector("#Results");
+    let score = document.querySelector("#Score");
+    function changeScore(){
+        score.textContent = "Rounds: " + rounds + ", Player Score: " + humanScore + ", Computer Score: " + botScore;
+    }
+    changeScore();
     function playRound(humanChoice, botChoice){
+        if (humanScore == 5 || botScore == 5){
+            rounds = 0;
+            humanScore = 0;
+            botScore = 0;
+        }
         if (humanChoice === botChoice){
             results.textContent = "It's a tie! Both players selected " + humanChoice;
         } else if (humanChoice === "rock" && botChoice === "scissors"
@@ -47,15 +57,13 @@ function playGame(){
             botScore++;
         } else {results.textContent = "logic error in playRound";}
         rounds++;
-        if (rounds == 5) {
+        changeScore();
+        if (humanScore == 5 || botScore == 5) {
             if (humanScore > botScore){
                 results.textContent = "Congrats! You won Rock Paper Scissors!";
             } else {
                 results.textContent = "The computer won Rock Paper Scissors! Try again!";
             }
-            rounds = 0;
-            botScore = 0;
-            humanScore = 0;
         }
     }
     rock.addEventListener("click", () => playRound("rock", getComputerChoice()));
