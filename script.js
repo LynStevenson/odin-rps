@@ -28,38 +28,39 @@ function playGame(){
     let humanScore = 0;
     let botScore = 0;
     let rounds = 0;
-    let Rock = document.querySelector("#Rock");
-    let Scissors = document.querySelector("#Scissors");
-    let Paper = document.querySelector("#Paper");
+    let rock = document.querySelector("#Rock");
+    let scissors = document.querySelector("#Scissors");
+    let paper = document.querySelector("#Paper");
+    let results = document.querySelector("#Results");
     function playRound(humanChoice, botChoice){
         if (humanChoice === botChoice){
-            console.log("It's a tie! Both players selected " + humanChoice);
+            results.textContent = "It's a tie! Both players selected " + humanChoice;
         } else if (humanChoice === "rock" && botChoice === "scissors"
                     || humanChoice === "scissors" && botChoice === "paper"
                     || humanChoice === "paper" && botChoice === "rock"){
-            console.log("You win! " + humanChoice + " beats " + botChoice);
+            results.textContent = "You win! " + humanChoice + " beats " + botChoice;
             humanScore++;
         } else if (humanChoice === "rock" && botChoice === "paper"
                     || humanChoice === "scissors" && botChoice === "rock"
                     || humanChoice === "paper" && botChoice === "scissors"){
-            console.log("You lose! " + humanChoice + " lost to " + botChoice);
+            results.textContent = "You lose! " + humanChoice + " lost to " + botChoice;
             botScore++;
-        } else {console.log("logic error in playRound");}
+        } else {results.textContent = "logic error in playRound";}
         rounds++;
         if (rounds == 5) {
             if (humanScore > botScore){
-                console.log("Congrats! You won Rock Paper Scissors!");
+                results.textContent = "Congrats! You won Rock Paper Scissors!";
             } else {
-                console.log("The computer won Rock Paper Scissors! Try again!");
+                results.textContent = "The computer won Rock Paper Scissors! Try again!";
             }
             rounds = 0;
             botScore = 0;
             humanScore = 0;
         }
     }
-    Rock.addEventListener("click", () => playRound("rock", getComputerChoice()));
-    Scissors.addEventListener("click", () => playRound("scissors", getComputerChoice()));
-    Paper.addEventListener("click", () => playRound("paper", getComputerChoice()));
+    rock.addEventListener("click", () => playRound("rock", getComputerChoice()));
+    scissors.addEventListener("click", () => playRound("scissors", getComputerChoice()));
+    paper.addEventListener("click", () => playRound("paper", getComputerChoice()));
 }
 
 playGame();
